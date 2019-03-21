@@ -20,8 +20,8 @@ describe('GET /', () => {
 
   describe('Genres', () => {
     it('get all available genres when this endpoint is hit', (done) => {
-      chai.
-        request(server)
+      chai
+        .request(server)
         .get('api/v1/genres')
         .end((err, res) => {
           res.body.should.have.property('status').eql('200');
