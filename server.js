@@ -2,10 +2,14 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import 'dotenv/config';
 
+import genreRoute from './routes/genreRoute';
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+app.use('/api/v1/genres', genreRoute);
 
 app.get('/', (req, res) => {
   res.status(200).send({
