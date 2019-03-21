@@ -22,7 +22,7 @@ describe('GET /', () => {
     it('get all available genres when this endpoint is hit', (done) => {
       chai
         .request(server)
-        .get('api/v1/genres')
+        .get('/api/v1/genres')
         .end((err, res) => {
           res.body.should.have.property('status').eql('200');
           res.body.shoud.be.an('object');
