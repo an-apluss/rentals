@@ -11,5 +11,5 @@ export default {
     { id: 9, name: 'crime' },
     { id: 10, name: 'documentary' },
     { id: 11, name: 'war' },
+  ],
 };
-
