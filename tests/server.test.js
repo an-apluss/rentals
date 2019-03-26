@@ -43,5 +43,15 @@ describe('Rental', () => {
         });
       done();
     });
+    it('insert a new genre', (done) => {
+      chai
+        .request(app)
+        .get('/api/v1/genres/11')
+        .end((err, res) => {
+          res.body.should.have.property('status').eql(200);
+          res.body.should.be.an('object');
+        });
+      done();
+    });
   });
 });
