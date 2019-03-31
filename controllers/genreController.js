@@ -23,7 +23,7 @@ export default class GenreController {
     const genreId = req.params.id;
     const genre = data.genres.find(g => g.id === parseInt(genreId, 10));
     if (genre) return res.json({ status: 200, data: genre });
-    return res.json({ status: 203, error: 'No genre with such ID' });
+    return res.json({ status: 400, error: 'No genre with such ID' });
   }
 
   static updateGenre(req, res) {
@@ -31,6 +31,15 @@ export default class GenreController {
     const genre = data.genres.find(g => g.id === parseInt(genreId, 10));
     if (!genre) return res.json({ status: 400, error: 'No genre with such ID' });
     genre.name = req.body.name;
-    return res.json({ status: 200, error: 'Genre successfully updated' });
+    return res.json({ status: 200, messsage: 'Genre successfully updated' });
+  }
+
+  static deleteGenre(req, res) {
+    const genreId = req.params.id;
+    const genre = data.genres.find(g => g.id === parseInt(genreId, 10));
+    if (!genre) return res.json({ status: 400, error: 'No genre with such ID' });
+    const genreIndex = data.genres.indexOf(genre);
+    data.genres.splice(genreIndex, 1);
+    return res.json({ status: 200, message: 'Genre successfully updated' });
   }
 }
