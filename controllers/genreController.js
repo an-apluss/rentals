@@ -40,6 +40,6 @@ export default class GenreController {
     if (!genre) return res.json({ status: 400, error: 'No genre with such ID' });
     const genreIndex = data.genres.indexOf(genre);
     data.genres.splice(genreIndex, 1);
-    return res.json({ status: 200, message: 'Genre successfully updated' });
+    return res.json({ status: 200, message: 'Genre successfully deleted' });
   }
 }
