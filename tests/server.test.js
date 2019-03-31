@@ -53,5 +53,16 @@ describe('Rental', () => {
         });
       done();
     });
+    it('Update a genre by ID', (done) => {
+      chai
+        .request(app)
+        .put('/api/v1/genres/11')
+        .send({ name: 'Drama' })
+        .end((err, res) => {
+          res.body.should.have.property('status').eql(200);
+          res.body.should.be.an('object');
+        });
+      done();
+    });
   });
 });
