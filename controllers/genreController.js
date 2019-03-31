@@ -27,12 +27,10 @@ export default class GenreController {
   }
 
   static updateGenre(req, res) {
-    const formData = {
-      id: req.params.id,
-      name: req.body.name,
-    };
-    const updateGenre = data.genres.push(formData);
-    if (!updateGenre) return res.json({ status: 404, message: 'No such genre ID' });
-    return res.json({ status: 200, message: 'Genre successfully updated' });
+    const genreId = req.params.id;
+    const genre = data.genres.find(g => g.id === parseInt(genreId, 10));
+    if (!genre) return res.json({ status: 400, error: 'No genre with such ID' });
+    genre.name = req.body.name;
+    return res.json({ status: 200, error: 'Genre successfully updated' });
   }
 }
