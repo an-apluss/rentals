@@ -64,5 +64,15 @@ describe('Rental', () => {
         });
       done();
     });
+    it('Delete a genre by ID', (done) => {
+      chai
+        .request(app)
+        .delete('/api/v1/genres/10')
+        .end((err, res) => {
+          res.body.should.have.property('status').eql(200);
+          res.body.should.be.an('object');
+        });
+      done();
+    });
   });
 });
