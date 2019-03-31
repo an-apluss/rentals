@@ -43,7 +43,7 @@ describe('Rental', () => {
         });
       done();
     });
-    it('insert a new genre', (done) => {
+    it('Get a genre by ID', (done) => {
       chai
         .request(app)
         .get('/api/v1/genres/11')
