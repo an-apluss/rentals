@@ -16,6 +16,13 @@ export default class GenreController {
     };
     const addGenre = data.genres.push(formData);
     if (!addGenre) return res.send({ status: 400, error: 'Genre can not be add' });
-    return res.send({ status: 201, message: 'Genre added succussfully' });
+    return res.send({ status: 201, message: 'Genre added successfully' });
+  }
+
+  static getSingleGenre(req, res) {
+    const genreId = req.prams.id;
+    const genre = data.genres.find(g => g.id === parseInt(genreId, 10));
+    if (genre) return res.json({ status: 200, data: genre });
+    return res.json({ status: 203, error: 'No genre with such ID' });
   }
 }
