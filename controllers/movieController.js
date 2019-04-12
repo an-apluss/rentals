@@ -5,7 +5,7 @@ import dummydata2 from '../datastorage/genre';
 class MovieController {
   static getAllMovie(req, res) {
     const { movies } = dummydata;
-    if (!movies) res.status(404).json({ status: 404, error: 'No movie is available' });
+    if (!movies) return res.status(404).json({ status: 404, error: 'No movie is available' });
     return res.status(200).json({ status: 200, data: movies });
   }
 
@@ -26,12 +26,10 @@ class MovieController {
     } else {
       const lastGenreId = genres[genres.length - 1].id;
       genreId = lastGenreId + 1;
-
       const newGenre = {
         id: genreId,
         name: genre,
       };
-
       genres.push(newGenre);
     }
     const newMovie = {
@@ -48,8 +46,26 @@ class MovieController {
     const { movies } = dummydata;
     const { id } = req.params;
     const movieExist = movies.find(movie => movie.id === parseInt(id, 10));
-    if (!movieExist) res.status(404).json({ status: 404, error: 'No such movie' });
+    if (!movieExist) return res.status(404).json({ status: 404, error: 'No such movie' });
     return res.status(200).json({ status: 200, data: movieExist });
+  }
+
+  static deleteMovie(req, res) {
+    const { movies } = dummydata;
+    const { genres } = dummydata2;
+    const { id } = req.params;
+    const movieExist = movies.find(movie => movie.id === parseInt(id, 10));
+    if (!movieExist) return res.status(404).json({ status: 404, error: 'No such movie' });
+    const genreExist = genres.find(genre => genre.id === movieExist.genreId);
+    const sameGenre = movies.filter(m => m.genreId === movieExist.genreId).length;
+    if (genreExist && sameGenre === 1) {
+      const index = genres.indexOf(genreExist);
+      genres.splice(index, 1);
+    }
+    const index = movies.indexOf(movieExist);
+    movies.splice(index, 1);
+
+    return res.status(200).json({ status: 200, message: 'movie deleted successfully', data: movieExist });
   }
 }
 
