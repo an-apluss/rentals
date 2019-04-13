@@ -18,4 +18,19 @@ describe('Customer', () => {
       });
     done();
   });
+  it('insert new customer when this endpoint is hit', (done) => {
+    const customer = {
+      id: 1, firstname: 'Anuoluwapo', lastname: 'Akinseye', phone: '08134326603',
+    };
+    chai
+      .request(app)
+      .post('/api/v1/customer')
+      .send(customer)
+      .end((err, res) => {
+        res.body.should.have.property('status').eql(201);
+        res.body.should.be.an('object');
+        res.body.should.have.property('message').to.be.an('customer successfully added');
+      });
+    done();
+  });
 });
