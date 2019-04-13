@@ -29,7 +29,7 @@ describe('Customer', () => {
       .end((err, res) => {
         res.body.should.have.property('status').eql(201);
         res.body.should.be.an('object');
-        res.body.should.have.property('message').to.be.an('customer successfully added');
+        res.body.should.have.property('message').to.be.eql('customer successfully added');
       });
     done();
   });
