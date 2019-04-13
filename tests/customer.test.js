@@ -33,4 +33,14 @@ describe('Customer', () => {
       });
     done();
   });
+  it('get a customer by ID when this endpoint is hit', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/customer/1')
+      .end((err, res) => {
+        res.body.should.have.property('status').eql(200);
+        res.body.should.be.an('object');
+      });
+    done();
+  });
 });
