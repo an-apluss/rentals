@@ -1,0 +1,21 @@
+/* eslint-disable no-undef */
+import chai from 'chai';
+import chaiHttp from 'chai-http';
+
+import app from '../server';
+
+chai.use(chaiHttp);
+chai.should();
+describe('Customer', () => {
+  it('get all available customers when this endpoint is hit', (done) => {
+    chai
+      .request(app)
+      .get('/api/v1/customer')
+      .end((err, res) => {
+        res.body.should.have.property('status').eql(200);
+        res.body.should.be.an('object');
+        res.body.should.have.property('data').to.be.an('array');
+      });
+    done();
+  });
+});
