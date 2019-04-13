@@ -43,4 +43,14 @@ describe('Customer', () => {
       });
     done();
   });
+  it('delete a customer by ID when this endpoint is hit', (done) => {
+    chai
+      .request(app)
+      .delete('/api/v1/customer/1')
+      .end((err, res) => {
+        res.body.should.have.property('status').eql(200);
+        res.body.should.have.property('message').to.be.eql('customer deleted successfully');
+      });
+    done();
+  });
 });
