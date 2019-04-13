@@ -18,6 +18,13 @@ class CustomerController {
     if (!insertNewCustomer) return res.json({ status: 401, error: 'Customer cannot be added' });
     return res.json({ status: 201, message: 'customer successfully added' });
   }
+
+  static getSingleCustomer(req, res) {
+    const { id } = req.params;
+    const customerExist = dummydata.customers.find(customer => customer.id === parseInt(id, 10));
+    if (!customerExist) return res.json({ status: 404, error: 'No such customer ID' });
+    return res.json({ status: 200, data: customerExist });
+  }
 }
 
 export default CustomerController;
