@@ -4,8 +4,9 @@ import express from 'express';
 import MovieController from '../controllers/movieController';
 
 const router = express.Router();
-const { getAllMovie } = MovieController;
+const { getAllMovie, postMovie } = MovieController;
 
 router.get('/', getAllMovie);
+router.post('/', postMovie);
 
 export default router;
