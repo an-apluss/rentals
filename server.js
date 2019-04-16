@@ -1,9 +1,12 @@
+/* eslint-disable linebreak-style */
 import express from 'express';
 import bodyParser from 'body-parser';
 import 'dotenv/config';
 
 import genreRoute from './routes/genreRoute';
-import customerRoute from './routes/customerRoute'
+import customerRoute from './routes/customerRoute';
+import movieRoute from './routes/movieRoute';
+
 
 const app = express();
 
@@ -12,6 +15,7 @@ app.use(bodyParser.json());
 
 app.use('/api/v1/genres', genreRoute);
 app.use('/api/v1/customer', customerRoute);
+app.use('/api/v1/movie', movieRoute);
 
 app.get('/', (req, res) => {
   res.status(200).send({
