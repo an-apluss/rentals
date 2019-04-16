@@ -43,6 +43,14 @@ class MovieController {
       status: 201, message: 'movie successfully added', data: newMovie,
     });
   }
+
+  static getSingleMovie(req, res) {
+    const { movies } = dummydata;
+    const { id } = req.params;
+    const movieExist = movies.find(movie => movie.id === parseInt(id, 10));
+    if (!movieExist) res.status(404).json({ status: 404, error: 'No such movie' });
+    return res.status(200).json({ status: 200, data: movieExist });
+  }
 }
 
 export default MovieController;
