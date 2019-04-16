@@ -20,7 +20,6 @@ class MovieController {
     const { title, stock, genre } = req.body;
 
     const genreExist = genres.find(g => g.name === genre);
-    console.log(genreExist);
     let genreId;
     if (genreExist) {
       genreId = genreExist.id;
@@ -39,9 +38,9 @@ class MovieController {
       id: newMovieId, title, stock, genreId,
     };
 
-    const insertMovie = movies.push(newMovie);
+    movies.push(newMovie);
     return res.status(201).json({
-      status: 201, message: 'movie successfully added', data: insertMovie,
+      status: 201, message: 'movie successfully added', data: newMovie,
     });
   }
 }
