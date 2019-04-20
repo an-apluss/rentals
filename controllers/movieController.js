@@ -67,6 +67,17 @@ class MovieController {
 
     return res.status(200).json({ status: 200, message: 'movie deleted successfully', data: movieExist });
   }
+
+  static updateMovie(req, res) {
+    const { movies } = dummydata;
+    const { id } = req.params;
+    const { title, stock } = req.body;
+    const movieExist = movies.find(movie => movie.id === parseInt(id, 10));
+    if (!movieExist) return res.status(404).json({ status: 404, error: 'movie not found' });
+    movieExist.title = title || movieExist.title;
+    movieExist.stock = stock || movieExist.stock;
+    return res.status(201).json({ status: 200, data: movieExist, message: 'movie updated successfully' });
+  }
 }
 
 export default MovieController;
