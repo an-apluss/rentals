@@ -1,8 +1,9 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable no-undef */
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 
-import app from '../server';
+import app from '../server/server';
 
 chai.use(chaiHttp);
 chai.should();
