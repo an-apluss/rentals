@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 import express from 'express';
 
-import MovieController from '../server/controllers/movieController';
+import MovieController from '../controllers/movieController';
 
 const router = express.Router();
 const {

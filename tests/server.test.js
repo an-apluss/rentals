@@ -1,8 +1,8 @@
+/* eslint-disable linebreak-style */
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 
-import app from '../server';
-// import GenreController from '../controllers/genreController';
+import app from '../server/server';
 
 chai.use(chaiHttp);
 chai.should();
