@@ -1,4 +1,5 @@
 /* eslint-disable linebreak-style */
+import Joi from 'joi';
 import dummydata from '../datastorage/movie';
 import dummydata2 from '../datastorage/genre';
 
@@ -18,12 +19,17 @@ class MovieController {
     const { genres } = dummydata2;
 
     const { title, stock, genre } = req.body;
-
+    const schema = {
+      title: Joi.string().required(),
+      stock: Joi.number().required(),
+      genre: Joi.string().required(),
+    };
+    const { error } = Joi.validate(req.body, schema);
+    if (error) return res.status(400).json({ status: 400, error: error.details[0].message });
     const genreExist = genres.find(g => g.name === genre);
     let genreId;
-    if (genreExist) {
-      genreId = genreExist.id;
-    } else {
+    if (genreExist) genreId = genreExist.id;
+    else {
       const lastGenreId = genres[genres.length - 1].id;
       genreId = lastGenreId + 1;
       const newGenre = {
@@ -74,8 +80,14 @@ class MovieController {
     const { title, stock } = req.body;
     const movieExist = movies.find(movie => movie.id === parseInt(id, 10));
     if (!movieExist) return res.status(404).json({ status: 404, error: 'movie not found' });
-    movieExist.title = title || movieExist.title;
-    movieExist.stock = stock || movieExist.stock;
+    const schema = {
+      title: Joi.string(),
+      stock: Joi.number(),
+    };
+    const { error } = Joi.validate(req.body, schema);
+    if (error) return res.status(400).json({ status: 400, error: error.details[0].message });
+    movieExist.title = title;
+    movieExist.stock = stock;
     return res.status(201).json({ status: 200, data: movieExist, message: 'movie updated successfully' });
   }
 }
