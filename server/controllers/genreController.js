@@ -38,8 +38,8 @@ export default class GenreController {
     if (!genre) return res.status(400).json({ status: 400, error: 'No genre with such ID' });
     const updateData = { id: genreId, name };
     const schema = {
-      id: Joi.number().required(),
-      name: Joi.string().required(),
+      id: Joi.number(),
+      name: Joi.string(),
     };
     const { error } = Joi.validate(updateData, schema);
     if (error) return res.status(400).json({ status: 400, error: error.details[0].message });
