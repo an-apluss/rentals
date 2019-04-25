@@ -43,7 +43,7 @@ export default class GenreController {
     };
     const { error } = Joi.validate(updateData, schema);
     if (error) return res.status(400).json({ status: 400, error: error.details[0].message });
-    genre.name = name;
+    genre.name = name || genre.name;
     return res.json({ status: 200, data: [genre], messsage: 'Genre successfully updated' });
   }
 
