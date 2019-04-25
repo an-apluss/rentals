@@ -56,9 +56,9 @@ class CustomerController {
     const { error } = Joi.validate(req.body, schema);
     if (error) return res.status(400).json({ status: 400, error: error.details[0].message });
     const { firstname, lastname, phone } = req.body;
-    customerExist.firstname = firstname;
-    customerExist.lastname = lastname;
-    customerExist.phone = phone;
+    customerExist.firstname = firstname || customerExist.firstname;
+    customerExist.lastname = lastname || customerExist.lastname;
+    customerExist.phone = phone || customerExist.phone;
     return res.json({ status: 200, data: customerExist, message: 'Customer updated successfully' });
   }
 }
