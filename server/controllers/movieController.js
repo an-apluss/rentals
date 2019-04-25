@@ -86,8 +86,8 @@ class MovieController {
     };
     const { error } = Joi.validate(req.body, schema);
     if (error) return res.status(400).json({ status: 400, error: error.details[0].message });
-    movieExist.title = title;
-    movieExist.stock = stock;
+    movieExist.title = title || movieExist.title;
+    movieExist.stock = stock || movieExist.stock;
     return res.status(201).json({ status: 200, data: movieExist, message: 'movie updated successfully' });
   }
 }
