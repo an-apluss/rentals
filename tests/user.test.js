@@ -240,7 +240,7 @@ describe('User', () => {
       const user = {
         firstname: 'Anu',
         lastname: 'Akin',
-        email: 'ann@gmail.com',
+        email: 'anu@gmail.com',
         password: 'secret',
       };
       chai
@@ -249,10 +249,14 @@ describe('User', () => {
         .send(user)
         .end((err, res) => {
           res.body.should.have.property('status').eql(201);
-          res.body.should.have.property('token').be.a('string');
-          res.body.data.should.have.property('firstname').be.a('string');
-          res.body.data.should.have.property('lastname').be.a('string');
-          res.body.data.should.have.property('password').be.a('string');
+          res.body.data[0].should.have.property('token');
+          res.body.data[0].should.have.property('user').with.keys('id', 'lastname', 'firstname', 'email', 'password', 'type');
+          res.body.data[0].user.id.should.be.a('number');
+          res.body.data[0].user.firstname.should.be.a('string');
+          res.body.data[0].user.lastname.should.be.a('string');
+          res.body.data[0].user.email.should.be.a('string');
+          res.body.data[0].user.password.should.be.a('string');
+          res.body.data[0].user.type.should.be.a('string');
           res.body.should.be.an('object');
         });
       done();
@@ -313,7 +317,7 @@ describe('User', () => {
         .post('/api/v1/auth/signin')
         .send({ email: 'tunji@yahoomail.com', password: 'secret' })
         .end((err, res) => {
-          res.body.should.have.property('status').eql(404);
+          res.body.should.have.property('status').eql(400);
           res.body.should.have.property('error');
           res.body.should.be.an('object');
         });
@@ -325,7 +329,7 @@ describe('User', () => {
         .post('/api/v1/auth/signin')
         .send({ email: 'ann@gmail.com', password: 'secret123554' })
         .end((err, res) => {
-          res.body.should.have.property('status').eql(404);
+          res.body.should.have.property('status').eql(400);
           res.body.should.have.property('error');
           res.body.should.be.an('object');
         });
@@ -338,13 +342,13 @@ describe('User', () => {
         .send({ email: 'ann@gmail.com', password: 'secret' })
         .end((err, res) => {
           res.body.should.have.property('status').eql(200);
-          res.body.data.should.have.property('token');
+          res.body.data[0].should.have.property('token').to.be.a('string');
           res.body.should.be.an('object');
         });
       done();
     });
   });
-  describe('POST /api/v1/auth/makestaff', () => {
+  describe('POST /api/v1/auth/createuser', () => {
     it('user firstname should not be empty', (done) => {
       const user = {
         firstname: '',
