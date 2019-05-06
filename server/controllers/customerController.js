@@ -10,22 +10,8 @@ class CustomerController {
   }
 
   static postCustomer(req, res) {
-    const { customers } = dummydata;
-    const lastCustomerId = customers[customers.length - 1].id;
-    const newCustomerId = lastCustomerId + 1;
-    const { firstname, lastname, phone } = req.body;
-    const newCustomer = {
-      id: newCustomerId, firstname, lastname, phone,
-    };
-    const schema = {
-      firstname: Joi.string().required().trim(),
-      lastname: Joi.string().required().trim(),
-      phone: Joi.string().regex(/\+?([0-9]{3})?(0)?([0-9]{10})/).required().trim(),
-    };
-    const { error } = Joi.validate(req.body, schema);
-    if (error) return res.status(400).json({ status: 400, error: error.details[0].message });
-    customers.push(newCustomer);
-    return res.json({ status: 201, data: newCustomer, message: 'customer successfully added' });
+    const response = customerService.createCustomer(req.body);
+    return res.status(response.status).json(response);
   }
 
   static getSingleCustomer(req, res) {
