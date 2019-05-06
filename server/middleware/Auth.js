@@ -18,10 +18,12 @@ export default class Auth {
   }
 
   static adminCheck(req, res, next) {
-    if (req.user.type === 'admin') return next();
-    return res.status(401).json({
-      status: 401,
-      error: 'Access Denied. You are unauthorized to perform this Action',
-    });
+    if (req.user.type !== 'admin') {
+      return res.status(401).json({
+        status: 401,
+        error: 'Access Denied. You are unauthorized to perform this Action',
+      });
+    }
+    return next();
   }
 }
