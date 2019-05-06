@@ -62,3 +62,4 @@ typings/
 
 # environment variable file 
 build
+lcov.info
