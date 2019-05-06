@@ -29,6 +29,7 @@ export default class CustomerService {
         lastname,
         phone,
       }],
+      message: 'customer successfully added',
     };
   }
 
@@ -37,5 +38,14 @@ export default class CustomerService {
     const customerExist = customers.find(customer => customer.id === parseInt(id, 10));
     if (!customerExist) return { status: 404, error: 'No such customer ID' };
     return { status: 200, data: [customerExist] };
+  }
+
+  static deleteOneCustomer(id) {
+    const { customers } = storage;
+    const customerExist = customers.find(customer => customer.id === parseInt(id, 10));
+    if (!customerExist) return { status: 404, error: 'No such customer ID' };
+    const customerIndex = customers.indexOf(customerExist);
+    customers.splice(customerIndex, 1);
+    return { status: 200, data: [customerExist], message: 'customer deleted successfully' };
   }
 }

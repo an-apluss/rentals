@@ -20,12 +20,8 @@ class CustomerController {
   }
 
   static deleteCustomer(req, res) {
-    const { id } = req.params;
-    const customerExist = dummydata.customers.find(customer => customer.id === parseInt(id, 10));
-    if (!customerExist) return res.json({ status: 404, error: 'No such customer ID' });
-    const customerIndex = dummydata.customers.indexOf(customerExist);
-    dummydata.customers.splice(customerIndex, 1);
-    return res.json({ status: 200, data: customerExist, message: 'customer deleted successfully' });
+    const response = customerService.deleteOneCustomer(req.params.id);
+    return res.status(response.status).json(response);
   }
 
   static updateCustomer(req, res) {
