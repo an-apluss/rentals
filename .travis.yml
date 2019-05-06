@@ -3,6 +3,9 @@ language: node_js
 node_js:
   - "stable"
 
+env:
+  global: CODECLIMATE_REPO_TOKEN=4c3478c43a1e997a23536f0184b1150425a6fe1d582a99164ae3234b03028d56
+
 install:
   - npm install
 
