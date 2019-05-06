@@ -15,12 +15,12 @@ const {
   updateCustomer,
 } = CustomerController;
 
-const { checkRegister } = CustomerValidation;
+const { checkRegister, checkUpdate } = CustomerValidation;
 
 router.get('/', getAllCustomer);
 router.post('/', checkRegister, postCustomer);
 router.get('/:id', getSingleCustomer);
 router.delete('/:id', deleteCustomer);
-router.put('/:id', updateCustomer);
+router.put('/:id', checkUpdate, updateCustomer);
 
 export default router;

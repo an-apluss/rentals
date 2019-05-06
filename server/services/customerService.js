@@ -48,4 +48,15 @@ export default class CustomerService {
     customers.splice(customerIndex, 1);
     return { status: 200, data: [customerExist], message: 'customer deleted successfully' };
   }
+
+  static updateOneCustomer(id, data) {
+    const { customers } = storage;
+    const customerExist = customers.find(customer => customer.id === parseInt(id, 10));
+    if (!customerExist) return { status: 404, error: 'No such customer ID' };
+    const { firstname, lastname, phone } = data;
+    customerExist.firstname = firstname || customerExist.firstname;
+    customerExist.lastname = lastname || customerExist.lastname;
+    customerExist.phone = phone || customerExist.phone;
+    return { status: 200, data: customerExist, message: 'Customer updated successfully' };
+  }
 }
