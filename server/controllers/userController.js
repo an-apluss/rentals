@@ -1,5 +1,6 @@
-/* eslint-disable class-methods-use-this */
 /* eslint-disable linebreak-style */
+/* eslint-disable class-methods-use-this */
+
 import UserService from '../services/userService';
 
 class UserController {

@@ -48,6 +48,24 @@ const validateSignin = (user) => {
   return Joi.validate(user, schema);
 };
 
+const validateRegisterCustomer = (customer) => {
+  const schema = {
+    firstname: Joi.string().required().trim(),
+    lastname: Joi.string().required().trim(),
+    phone: Joi.string().regex(/\+?([0-9]{3})?(0)?([0-9]{10})/).required().trim(),
+  };
+  return Joi.validate(customer, schema);
+};
+
+const validateUpdateCustomer = (customer) => {
+  const schema = {
+    firstname: Joi.string(),
+    lastname: Joi.string(),
+    phone: Joi.string().regex(/\+?([0-9]{3})?(0)?([0-9]{10})/),
+  };
+  return Joi.validate(customer, schema);
+};
+
 const generateToken = (user) => {
   const token = jwt.sign({
     id: user.id,
@@ -71,6 +89,8 @@ export {
   generateUserType,
   validateSignup,
   validateSignin,
+  validateRegisterCustomer,
+  validateUpdateCustomer,
   generateToken,
   verifyToken,
 };
