@@ -1,12 +1,12 @@
 /* eslint-disable linebreak-style */
 import Joi from 'joi';
 import dummydata from '../datastorage/customer';
+import customerService from '../services/customerService';
 
 class CustomerController {
   static getAllCustomer(req, res) {
-    const customer = dummydata.customers;
-    if (!customer) return res.json({ status: 404, error: 'No customer to fetch' });
-    return res.json({ status: 200, data: customer });
+    const response = customerService.findAllCustomer();
+    return res.status(response.status).json(response);
   }
 
   static postCustomer(req, res) {
