@@ -31,4 +31,11 @@ export default class CustomerService {
       }],
     };
   }
+
+  static findOneCustomer(id) {
+    const { customers } = storage;
+    const customerExist = customers.find(customer => customer.id === parseInt(id, 10));
+    if (!customerExist) return { status: 404, error: 'No such customer ID' };
+    return { status: 200, data: [customerExist] };
+  }
 }
