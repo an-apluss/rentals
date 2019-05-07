@@ -1,0 +1,34 @@
+FORMAT: 1A
+HOST: https://rental-mgt.herokuapp.com/api/v1
+
+# Rental
+
+Rental is a movie renter management api.
+It power the activities of rental operation like customer creation,
+customer personal details, creation of movie and genre and others
+
+## User Collection [/auth]
+
+### Log In An Existing User [POST/auth/signin]
+
++ Request (application/json)
+
+   + Attributes
+        + email: `user@domain.com` (string) - user email address
+        + password: `secret` (string) - user password
+
++ Response 200 (application/json)
+
+   + Attributes (User response)
+   
+
+# Data Structures
+
+## User response 
+
++ token: `544yiu4y090939849rl;kfliuwruy` (string) 
++ id: `1` (number) - The ID of the newly registered user
++ firstName: `ann` (string)
++ lastName: `macakins` (string)
++ email: `ann@domain.com` (string)
++ type: `admin` (string)
