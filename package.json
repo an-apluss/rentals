@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "clean": "rm -rf build && mkdir build",
-    "build-babel": "babel ./server -d ./build && node ./build/server",
+    "build-babel": "babel ./server -d ./build && node ./build/server.js",
     "build": "npm run clean && npm run build-babel",
     "start": "npm run build && node ./build/server.js",
     "test": "nyc --reporter=html --reporter=text mocha --require @babel/register tests/*.js --timeout 50000 --exit || true",
