@@ -66,6 +66,20 @@ const validateUpdateCustomer = (customer) => {
   return Joi.validate(customer, schema);
 };
 
+const validateRegisterGenre = (genre) => {
+  const schema = {
+    name: Joi.string().required(),
+  };
+  return Joi.validate(genre, schema);
+};
+
+const validateUpdateGenre = (genre) => {
+  const schema = {
+    name: Joi.string().required(),
+  };
+  return Joi.validate(genre, schema);
+};
+
 const generateToken = (user) => {
   const token = jwt.sign({
     id: user.id,
@@ -91,6 +105,8 @@ export {
   validateSignin,
   validateRegisterCustomer,
   validateUpdateCustomer,
+  validateRegisterGenre,
+  validateUpdateGenre,
   generateToken,
   verifyToken,
 };
