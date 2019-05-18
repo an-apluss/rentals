@@ -13,12 +13,15 @@ export default class GenreController {
   }
 
   static getSingleGenre(req, res) {
-    const response = genreService.findOneGenre(req.params.id);
+    const { id } = req.params;
+    const response = genreService.findOneGenre(id);
     return res.status(response.status).json(response);
   }
 
   static updateGenre(req, res) {
-    const response = genreService.updateOneGenre(req.params.id, req.body.name);
+    const { id } = req.params;
+    const { name } = req.body;
+    const response = genreService.updateOneGenre(id, name);
     return res.status(response.status).json(response);
   }
 
